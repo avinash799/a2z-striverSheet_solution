@@ -3,17 +3,34 @@ using namespace std;
 
 class Solution {
 public:
-    void sortStack(stack<int> &st) {
 
-        // base condition
-        if(st.empty())
+    void insertAtBottom(stack<int>& st, int x) {
+        // Base condition
+        if(st.empty()) {
+            st.push(x);
             return;
+        }
 
         int topElement = st.top();
-        cout << topElement << endl;
         st.pop();
 
-        sortStack(st);
+        insertAtBottom(st, x);
+
+        st.push(topElement);
+    }
+
+    void reverseStack(stack<int>& st) {
+        // Base condition
+        if(st.empty()) {
+            return;
+        }
+
+        int topElement = st.top();
+        st.pop();
+
+        reverseStack(st);
+
+        insertAtBottom(st, topElement);
     }
 };
 
@@ -30,7 +47,12 @@ int main() {
     }
 
     Solution obj;
-    obj.sortStack(st);
+    obj.reverseStack(st);
+
+    while(!st.empty()) {
+        cout << st.top() << " ";
+        st.pop();
+    }
 
     return 0;
 }
