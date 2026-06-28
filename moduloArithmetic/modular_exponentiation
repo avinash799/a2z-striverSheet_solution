@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const long long MOD = 1000000007;
+
+// Function to calculate (base^exp) % MOD
+long long power(long long base, long long exp) {
+
+    // Base case:
+    // Any number raised to power 0 is 1.
+    if (exp == 0)
+        return 1;
+
+    // Calculate base^(exp/2)
+    long long half = power(base, exp / 2);
+
+    // Square the result and take modulo
+    long long result = (half * half) % MOD;
+
+    // If exponent is odd,
+    // multiply one extra base.
+    if (exp % 2 == 1) {
+        result = (result * base) % MOD;
+    }
+
+    return result;
+}
+
+int main() {
+
+    long long a, b;
+    cin >> a >> b;
+
+    cout << power(a, b);
+
+    return 0;
+}
